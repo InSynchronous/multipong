@@ -10,17 +10,16 @@ Paddle p(100, 100);
 
 void user_renderer(Renderer &r) { p.render_paddle(r); }
 
-void user_keyboard_handler(const bool *keys, float dt) {
-    p.handle_input(keys, dt);
-}
-
 int main() {
-    Renderer r(1280, 720, *user_renderer, *user_keyboard_handler);
+    Renderer r(1280, 720, *user_renderer);
 
     const bool &running = r.get_status();
+    const bool *&keys = r.get_keys();
+    const float &dt = r.get_dt();
 
     while (running) {
         r.cycle_render();
+        p.handle_input(keys, dt);
     }
 
     return 0;

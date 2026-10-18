@@ -2,10 +2,9 @@
 #include <iostream>
 #include <stdexcept>
 
-Renderer::Renderer(int width, int height, void (*user_render)(Renderer &),
-                   void (*user_keyboard_handler)(const bool *, float))
-    : width(width), height(height), user_render(user_render),
-      user_keyboard_handler(user_keyboard_handler) {
+Renderer::Renderer(int width, int height, void (*user_render)(Renderer &))
+    : width(width), height(height), user_render(user_render) {
+
     std::cout << "loading sdl" << std::endl;
     if (!SDL_Init(SDL_INIT_VIDEO)) {
         throw std::runtime_error("sdl init failed");
@@ -33,6 +32,8 @@ Renderer::Renderer(int width, int height, void (*user_render)(Renderer &),
 }
 
 const bool &Renderer::get_status() { return running; }
+const bool *&Renderer::get_keys() { return keys; }
+const float &Renderer::get_dt() { return dt; }
 
 void Renderer::set_color(Vector4<int> color) {
     SDL_SetRenderDrawColor(renderer, color.x, color.y, color.z, color.a);
@@ -52,14 +53,12 @@ void Renderer::cycle_render() {
         }
     }
 
-    int current_time = SDL_GetTicks();
-    float dt = (current_time - last_time) / 1000.0f;
+    current_time = SDL_GetTicks();
+    dt = (current_time - last_time) / 1000.0f;
     last_time = current_time;
 
     SDL_PumpEvents();
-    const bool *keys = SDL_GetKeyboardState(nullptr);
-
-    user_keyboard_handler(keys, dt);
+    keys = SDL_GetKeyboardState(nullptr);
 
     SDL_SetRenderDrawColor(renderer, 30, 30, 40, 255);
     SDL_RenderClear(renderer);
