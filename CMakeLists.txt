@@ -21,4 +21,5 @@ target_include_directories(multipong PRIVATE
 
 target_compile_options(multipong PRIVATE
   -O3
+  -g
 )

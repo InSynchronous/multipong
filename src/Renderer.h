@@ -13,7 +13,7 @@ class Renderer {
     SDL_Event event;
     const bool *keys;
 
-    bool running;
+    bool running = true;
     int current_time;
     int last_time;
     float dt;
