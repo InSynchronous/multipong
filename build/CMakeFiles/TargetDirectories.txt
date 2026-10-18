@@ -1,3 +1,0 @@
-/home/ahsan/repos/multipong/build/CMakeFiles/multipong.dir
-/home/ahsan/repos/multipong/build/CMakeFiles/edit_cache.dir
-/home/ahsan/repos/multipong/build/CMakeFiles/rebuild_cache.dir
