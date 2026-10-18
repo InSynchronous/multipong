@@ -2,7 +2,8 @@
 #include <iostream>
 #include <stdexcept>
 
-Renderer::Renderer(int width, int height) : width(width), height(height) {
+Renderer::Renderer(int width, int height, void (*user_render)(Renderer &))
+    : width(width), height(height), user_render(user_render) {
     std::cout << "loading sdl" << std::endl;
     if (!SDL_Init(SDL_INIT_VIDEO)) {
         throw std::runtime_error("sdl init failed");
@@ -29,6 +30,17 @@ Renderer::Renderer(int width, int height) : width(width), height(height) {
 
 const bool &Renderer::get_status() { return running; }
 
+void Renderer::set_color(Vector4<int> color) {
+    SDL_SetRenderDrawColor(renderer, color.x, color.y, color.z, color.a);
+}
+
+void Renderer::render_rectangle(Vector4<float> points, Vector4<int> color) {
+    SDL_FRect rect = {points.x, points.y, points.z, points.a};
+
+    set_color(color);
+    SDL_RenderFillRect(renderer, &rect);
+}
+
 void Renderer::cycle_render() {
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_EVENT_QUIT) {
@@ -43,13 +55,9 @@ void Renderer::cycle_render() {
     SDL_SetRenderDrawColor(renderer, 30, 30, 40, 255);
     SDL_RenderClear(renderer);
 
-    SDL_FRect rect = {100, 100, 200, 200};
-
-    SDL_SetRenderDrawColor(renderer, 255, 80, 80, 255);
-    SDL_RenderFillRect(renderer, &rect);
+    this->user_render(*this);
 
     SDL_RenderPresent(renderer);
-
     SDL_Delay(16); // roughly 60 FPS
 }
 
