@@ -1,7 +1,9 @@
 #include "Paddle.h"
 
+extern const float paddle_width, paddle_height;
+
 void Paddle::render(Renderer &r) {
-    r.render_rectangle({x, y, 50, 200}, {255, 80, 80, 255});
+    r.render_rectangle({x, y, paddle_width, paddle_height}, {255, 80, 80, 255});
 }
 
 void Paddle::handle_input(const bool *keys, float dt) {

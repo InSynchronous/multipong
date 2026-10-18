@@ -109,7 +109,6 @@ void Renderer::cycle_render() {
     user_render(*this);
 
     SDL_RenderPresent(renderer);
-    SDL_Delay(16); // roughly 60 FPS
 }
 
 void Renderer::exit() {

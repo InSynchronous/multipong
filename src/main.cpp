@@ -7,6 +7,9 @@
 
 #include <iostream>
 
+extern const float paddle_width = 50;
+extern const float paddle_height = 200;
+
 void user_renderer(Renderer &r);
 
 Paddle p(100, 100);
