@@ -2,7 +2,8 @@
 #include <iostream>
 
 void Game::tick() {
-    std::cout << "Hi" << std::endl;
-    p.handle_input(keys, dt);
-    p.render_paddle(r);
+    for (auto o : renderables) {
+        o->render(r);
+        o->handle_input(keys, dt);
+    }
 }

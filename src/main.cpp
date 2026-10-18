@@ -18,10 +18,6 @@ void user_renderer(Renderer &r) { g.tick(); }
 int main() {
 
     const bool &running = r.get_status();
-    const bool *&keys = r.get_keys();
-    const float &dt = r.get_dt();
-
-    std::cout << running << std::endl;
     while (running) {
         r.cycle_render();
     }

@@ -32,6 +32,7 @@ class Renderer {
     const float &get_dt();
 
     void render_rectangle(Vector4<float> points, Vector4<int> color);
+    void render_circle(Vector4<float> points, Vector4<int> color);
 
     void cycle_render();
     void exit();

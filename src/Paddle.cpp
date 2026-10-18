@@ -1,6 +1,6 @@
 #include "Paddle.h"
 
-void Paddle::render_paddle(Renderer &r) {
+void Paddle::render(Renderer &r) {
     r.render_rectangle({x, y, 50, 200}, {255, 80, 80, 255});
 }
 

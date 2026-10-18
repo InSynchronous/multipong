@@ -1,13 +1,11 @@
 #pragma once
 
+#include "Object.h"
 #include "Renderer.h"
 
-class Paddle {
-  private:
-    float x, y;
-
+class Paddle : public Object {
   public:
-    Paddle(float x, float y) : x(x), y(y) {}
-    void render_paddle(Renderer &r);
+    Paddle(float x, float y) : Object(x, y) {}
+    void render(Renderer &r);
     void handle_input(const bool *keys, float dt);
 };
