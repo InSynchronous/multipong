@@ -1,3 +1,5 @@
+#pragma once
+
 #include <SDL3/SDL.h>
 
 template <typename T> struct Vector4 {
@@ -11,14 +13,17 @@ class Renderer {
     SDL_Event event;
 
     bool running;
+    int last_time;
 
     int width, height;
     void (*user_render)(Renderer &);
+    void (*user_keyboard_handler)(const bool *keys, float dt);
 
     void set_color(Vector4<int> color);
 
   public:
-    Renderer(int width, int height, void (*user_render)(Renderer &));
+    Renderer(int width, int height, void (*user_render)(Renderer &),
+             void (*user_keyboard_handler)(const bool *keys, float dt));
 
     const bool &get_status();
 
