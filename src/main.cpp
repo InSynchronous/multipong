@@ -1,10 +1,5 @@
 #include "Game.h"
 #include "Renderer.h"
-#include <SDL3/SDL.h>
-#include <SDL3/SDL_events.h>
-#include <SDL3/SDL_video.h>
-
-#include <iostream>
 
 extern const float paddle_width = 50;
 extern const float paddle_height = 50;

@@ -7,6 +7,7 @@
 class Paddle : public Object {
   private:
     const State state;
+    float cooldown = 0;
 
   public:
     Paddle(float x, float y, State state) : Object(x, y), state(state) {}

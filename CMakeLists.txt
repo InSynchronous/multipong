@@ -10,10 +10,11 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
 )
 
 find_package(SDL3 REQUIRED CONFIG)
+find_package(SDL3_ttf REQUIRED CONFIG)
 
 add_executable(multipong ${SOURCES})
 
-target_link_libraries(multipong PRIVATE SDL3::SDL3)
+target_link_libraries(multipong PRIVATE SDL3::SDL3 SDL3_ttf::SDL3_ttf)
 
 target_include_directories(multipong PRIVATE
   src

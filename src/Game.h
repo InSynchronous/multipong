@@ -15,9 +15,14 @@ class Game {
     Renderer &r;
     float speed = 200;
 
+    int p1_points = 0;
+    int p2_points = 0;
+
     std::array<Object *, 3> renderables = {&p1, &p2, &ball};
     const bool *&keys;
     const float &dt;
+
+    void reset();
 
   public:
     Game(Renderer &r)

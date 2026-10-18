@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL3/SDL.h>
+#include <SDL3_ttf/SDL_ttf.h>
 
 template <typename T> struct Vector4 {
     T x, y, z, a;
@@ -11,6 +12,8 @@ class Renderer {
     SDL_Window *window;
     SDL_Renderer *renderer;
     SDL_Event event;
+    TTF_Font *font;
+    TTF_TextEngine *engine;
     const bool *keys;
 
     bool running = true;
@@ -33,6 +36,7 @@ class Renderer {
 
     void render_rectangle(Vector4<float> points, Vector4<int> color);
     void render_circle(Vector4<float> points, Vector4<int> color);
+    void render_text(const char *text, float x, float y, Vector4<int> color);
 
     void cycle_render();
     void exit();

@@ -1,5 +1,7 @@
 #include "Renderer.h"
+#include <SDL3_ttf/SDL_ttf.h>
 #include <cmath>
+#include <filesystem>
 #include <iostream>
 #include <stdexcept>
 #include <vector>
@@ -11,6 +13,17 @@ Renderer::Renderer(int width, int height, void (*user_render)(Renderer &))
     if (!SDL_Init(SDL_INIT_VIDEO)) {
         throw std::runtime_error("sdl init failed");
     }
+
+    if (!TTF_Init()) {
+        throw std::runtime_error("sdl_ttf fail");
+    }
+    font = TTF_OpenFont("Roboto-Regular.ttf", 24.0f);
+    if (!font) {
+        throw std::runtime_error(
+            std::string("font load failed: ") + SDL_GetError() +
+            "\nWorking directory: " + std::filesystem::current_path().string());
+    }
+
     std::cout << "sdl loaded" << std::endl;
 
     window = SDL_CreateWindow("multipong", 1280, 720, SDL_WINDOW_RESIZABLE);
@@ -30,6 +43,13 @@ Renderer::Renderer(int width, int height, void (*user_render)(Renderer &))
         throw std::runtime_error("renderer failed");
     }
 
+    engine = TTF_CreateRendererTextEngine(renderer);
+    if (!engine) {
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        throw std::runtime_error("text engine failed");
+    }
+
     last_time = SDL_GetTicks();
 }
 
@@ -46,6 +66,24 @@ void Renderer::render_rectangle(Vector4<float> points, Vector4<int> color) {
 
     set_color(color);
     SDL_RenderFillRect(renderer, &rect);
+}
+
+void Renderer::render_text(const char *t, float x, float y,
+                           Vector4<int> color) {
+    TTF_Text *text = TTF_CreateText(engine, font, t, 0);
+
+    if (!text) {
+        std::cout << "TTF_CreateText failed: " << SDL_GetError() << '\n';
+        return;
+    }
+
+    set_color(color);
+
+    if (!TTF_DrawRendererText(text, x, y)) {
+        std::cout << "TTF_DrawRendererText failed: " << SDL_GetError() << '\n';
+    }
+
+    TTF_DestroyText(text);
 }
 
 /*
