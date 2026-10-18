@@ -9,5 +9,5 @@ class Ball : public Object {
 
     Ball(float x, float y) : Object(x, y) {}
     void render(Renderer &r, float dt);
-    void handle_input(const bool *keys, float dt) {}
+    void handle_input(const bool *keys) {}
 };

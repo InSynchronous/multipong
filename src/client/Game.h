@@ -1,9 +1,10 @@
 #pragma once
 
+#include "../shared/State.h"
 #include "Ball.h"
+#include "Client.h"
 #include "Object.h"
 #include "Paddle.h"
-#include "State.h"
 #include <array>
 #include <memory>
 
@@ -13,6 +14,7 @@ class Game {
     Paddle p2;
     Ball ball;
     Renderer &r;
+    Client &c;
     float speed = 200;
 
     int p1_points = 0;
@@ -25,9 +27,9 @@ class Game {
     void reset();
 
   public:
-    Game(Renderer &r)
+    Game(Renderer &r, Client &c)
         : ball(640, 360), p1(100, 260, State::left),
-          p2(1130, 260, State::right), r(r), keys(r.get_keys()),
+          p2(1130, 260, State::right), r(r), c(c), keys(r.get_keys()),
           dt(r.get_dt()) {}
     void tick();
 };

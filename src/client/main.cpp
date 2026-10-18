@@ -1,3 +1,4 @@
+#include "Client.h"
 #include "Game.h"
 #include "Renderer.h"
 
@@ -8,7 +9,8 @@ extern State active = State::left;
 void user_renderer(Renderer &r);
 
 Renderer r(1280, 720, user_renderer);
-Game g(r);
+Client client("localhost", 8080);
+Game g(r, client);
 
 void user_renderer(Renderer &r) { g.tick(); }
 

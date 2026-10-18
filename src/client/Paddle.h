@@ -1,8 +1,8 @@
 #pragma once
 
+#include "../shared/State.h"
 #include "Object.h"
 #include "Renderer.h"
-#include "State.h"
 
 class Paddle : public Object {
   private:
@@ -12,7 +12,9 @@ class Paddle : public Object {
   public:
     Paddle(float x, float y, State state) : Object(x, y), state(state) {}
     void render(Renderer &r, float dt);
-    void handle_input(const bool *keys, float dt);
+    void handle_input(const bool *keys);
 
     float blocking = 0;
+
+    bool w, a, s, d, blk;
 };

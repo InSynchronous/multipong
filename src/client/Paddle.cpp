@@ -1,4 +1,6 @@
 #include "Paddle.h"
+#include "Client.h"
+#include <iostream>
 
 extern const float paddle_width, paddle_height;
 extern State active;
@@ -20,28 +22,33 @@ void Paddle::render(Renderer &r, float dt) {
     }
 }
 
-void Paddle::handle_input(const bool *keys, float dt) {
+void Paddle::handle_input(const bool *keys) {
     float speed = 700.0f;
+    w = false;
+    a = false;
+    s = false;
+    d = false;
     if (active == state) {
         if (keys[SDL_SCANCODE_S]) {
-            y += speed * dt;
+            s = true;
         }
 
         if (keys[SDL_SCANCODE_W]) {
-            y -= speed * dt;
+            w = true;
         }
 
         if (keys[SDL_SCANCODE_D]) {
-            x += speed * dt;
+            d = true;
         }
 
         if (keys[SDL_SCANCODE_A]) {
-            x -= speed * dt;
+            a = true;
         }
 
         if (keys[SDL_SCANCODE_F] && cooldown <= 0) {
             blocking = 0.5;
             cooldown = blocking + 1;
+            blk = true;
         }
     }
 }
