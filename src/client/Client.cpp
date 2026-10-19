@@ -53,11 +53,18 @@ Client::~Client() { close(socket_fd); }
 ServerTelemetry Client::sendClientTelemetry(State user, bool w, bool a, bool s,
                                             bool d, bool blocking) {
     ClientTelemetry telemetry{};
-
-    uint8_t offset = static_cast<int>(user) == 1 ? 0 : 4;
-
-    telemetry.data = (w << offset) | (a << (offset + 1)) | (s << (offset + 2)) |
-                     (d << (offset + 3)) | (blocking << 7);
+    uint8_t data = 0;
+    if (user == State::left) {
+        data |= (1u << 0);
+    } else {
+        data |= (1u << 1);
+    }
+    if (w) data |= (1u << 2);
+    if (a) data |= (1u << 3);
+    if (s) data |= (1u << 4);
+    if (d) data |= (1u << 5);
+    if (blocking) data |= (1u << 6);
+    telemetry.data = data;
 
     ssize_t sent = 0;
     while (sent < sizeof(telemetry)) {

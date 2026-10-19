@@ -16,5 +16,5 @@ class Paddle : public Object {
 
     float blocking = 0;
 
-    bool w, a, s, d, blk;
+    bool w = false, a = false, s = false, d = false, blk = false;
 };

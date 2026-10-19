@@ -1,6 +1,7 @@
 #include "Client.h"
 #include "Game.h"
 #include "Renderer.h"
+#include <iostream>
 
 extern const float paddle_width = 50;
 extern const float paddle_height = 50;
@@ -14,7 +15,11 @@ Game g(r, client);
 
 void user_renderer(Renderer &r) { g.tick(); }
 
-int main() {
+int main(int argc, char *argv[]) {
+
+    if (std::string(argv[1]) == "right") {
+        active = State::right;
+    }
 
     const bool &running = r.get_status();
     while (running) {

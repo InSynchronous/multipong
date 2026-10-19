@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Client.h"
+#include <iostream>
 #include <string>
 
 extern const float paddle_height, paddle_width;
@@ -27,10 +28,9 @@ void Game::tick() {
         o->handle_input(keys);
     }
 
+    Paddle &p = (active == State::left) ? p1 : p2;
     ServerTelemetry response =
-        c.sendClientTelemetry(State::left, p1.w, p1.a, p1.s, p1.d, p1.blk);
-    response =
-        c.sendClientTelemetry(State::left, p2.w, p2.a, p2.s, p2.d, p2.blk);
+        c.sendClientTelemetry(active, p.w, p.a, p.s, p.d, p.blk);
 
     ball.x = response.ballx;
     ball.y = response.bally;

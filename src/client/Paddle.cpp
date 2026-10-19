@@ -48,7 +48,7 @@ void Paddle::handle_input(const bool *keys) {
         if (keys[SDL_SCANCODE_F] && cooldown <= 0) {
             blocking = 0.5;
             cooldown = blocking + 1;
-            blk = true;
         }
+        blk = (blocking > 0);
     }
 }
