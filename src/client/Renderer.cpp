@@ -17,7 +17,13 @@ Renderer::Renderer(int width, int height, void (*user_render)(Renderer &))
     if (!TTF_Init()) {
         throw std::runtime_error("sdl_ttf fail");
     }
-    font = TTF_OpenFont("Roboto-Regular.ttf", 24.0f);
+    const char *basePath = SDL_GetBasePath();
+    if (!basePath)
+        throw std::runtime_error("Failed to get executable path");
+
+    std::string fontPath = std::string(basePath) + "Roboto-Regular.ttf";
+
+    font = TTF_OpenFont(fontPath.c_str(), 24.0f);
     if (!font) {
         throw std::runtime_error(
             std::string("font load failed: ") + SDL_GetError() +
