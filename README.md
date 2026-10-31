@@ -1,7 +1,7 @@
 # multipong
 A multiplayer pong game written from scratch in C++ and SDL3.
 
-<video src="media/compressed.mp4" controls width="100%"></video>
+[Watch demo](media/compressed.mp4)
 
 ## Technical details
  - From scratch with no true graphics API. Software rendered(mostly)
