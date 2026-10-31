@@ -11,4 +11,5 @@ typedef struct {
     float ballx, bally;
     float p1x, p1y;
     float p2x, p2y;
+    int p1_points, p2_points;
 } ServerTelemetry;

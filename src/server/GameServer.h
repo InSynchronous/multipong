@@ -42,7 +42,4 @@ class GameServer {
   public:
     void tick(uint8_t p1_input, uint8_t p2_input, float dt);
     ServerTelemetry get_telemetry() const;
-
-    int get_p1_points() const { return p1_points; }
-    int get_p2_points() const { return p2_points; }
 };

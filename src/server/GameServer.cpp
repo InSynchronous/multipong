@@ -97,5 +97,5 @@ void GameServer::tick(uint8_t p1_input, uint8_t p2_input, float dt) {
 }
 
 ServerTelemetry GameServer::get_telemetry() const {
-    return {ball.x, ball.y, p1.x, p1.y, p2.x, p2.y};
+    return {ball.x, ball.y, p1.x, p1.y, p2.x, p2.y, p1_points, p2_points};
 }

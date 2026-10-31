@@ -39,8 +39,8 @@ void Game::tick() {
     p2.x = response.p2x;
     p2.y = response.p2y;
 
-    std::string score = "Score: " + std::to_string(p1_points) + " : " +
-                        std::to_string(p2_points);
+    std::string score = "Score: " + std::to_string(response.p1_points) + " : " +
+                        std::to_string(response.p2_points);
 
     r.render_text(score.c_str(), 100.0f, 100.0f, {255, 255, 255, 255});
 }
