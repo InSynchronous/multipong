@@ -43,6 +43,9 @@ Renderer::Renderer(int width, int height, void (*user_render)(Renderer &))
         throw std::runtime_error("renderer failed");
     }
 
+    SDL_SetRenderLogicalPresentation(renderer, 1280, 720,
+                                     SDL_LOGICAL_PRESENTATION_LETTERBOX);
+
     engine = TTF_CreateRendererTextEngine(renderer);
     if (!engine) {
         SDL_DestroyWindow(window);
