@@ -15,7 +15,7 @@ There is an appimage provided for both the server and the client. You need to ha
 ### From Linux x86-64 Appimage
 Launch a server on a given port:
 ```
-./multipong-server.appimage --port 8080
+./Multipong_Server-x86_64.AppImage --port 8080
 ```
 
 If playing with someone not on your LAN, use a port forwarding tool of your choice:
@@ -32,7 +32,7 @@ If playing with someone not on your LAN, use a port forwarding tool of your choi
 
 Join a match as either the left or right player:
 ```
-./multipong.appimage left --server localhost:8080
+./Multipong-x86_64.AppImage left --server localhost:8080
 ```
 
 If playing on your LAN, replace localhost with the local IP, if playing with port forwarding, put the server it's forwarded to(s) IP/Domain.
